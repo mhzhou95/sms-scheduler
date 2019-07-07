@@ -6,12 +6,12 @@ import configureStore from './store/configureStore';
 import { startSetSMS } from './actions/sms';
 import { startRemoveSMS } from './actions/sms';
 import moment from 'moment';
+import Nexmo from 'nexmo';
 import './styles/styles.scss';
 import './firebase/firebase';
 import * as serviceWorker from './serviceWorker';
 
 //Nexmo
-const Nexmo = require('nexmo');
 const nexmo = new Nexmo({
   apiKey: process.env.REACT_APP_NEXMO_API_PUBLIC,
   apiSecret: process.env.REACT_APP_NEXMO_API_SECRET,

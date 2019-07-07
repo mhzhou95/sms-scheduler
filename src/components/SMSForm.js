@@ -63,7 +63,9 @@ class SMSForm extends React.Component {
     }
   }
   onDateChange = (createdAt) => {
-    this.setState(()=> ({ createdAt: createdAt }))
+    if(createdAt){
+      this.setState(()=> ({ createdAt: createdAt }))
+    }
   }
   onFocusChange = ({ focused}) => {
     this.setState( ()=> ({calendarFocused: focused}))
@@ -114,6 +116,7 @@ class SMSForm extends React.Component {
             focused = {this.state.calendarFocused}
             onFocusChange = {this.onFocusChange}
             numberOfMonths = {1}
+
           /> </div>
           <button>Create SMS</button>
         </form>
