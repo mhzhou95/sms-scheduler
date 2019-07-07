@@ -17,7 +17,7 @@ const nexmo = new Nexmo({
   apiSecret: process.env.REACT_APP_NEXMO_API_SECRET,
 });
 const from = '16282541072';
-const to = '12679922977';
+
 
 // store
 const store = configureStore();
@@ -34,10 +34,14 @@ store.dispatch(startSetSMS()).then(()=> {
   ReactDOM.render(jsx , document.getElementById('root'));
 })
 
+// loop for sending texts every 10 seconds
 setInterval(()=>{
   store.getState().texts.forEach((text)=>{
     if( moment(text.sendAt) <= moment().valueOf() ){
-      nexmo.message.sendSms(from, to, text.message);
+      let number = "1"; 
+      number += text.number
+      console.log(number)
+      nexmo.message.sendSms(from, number, text.message);
       store.dispatch(startRemoveSMS({id: text.id}))
     }
   })
