@@ -1,14 +1,26 @@
-import uuid from 'uuid';
+import database from '../firebase/firebase';
 
-export const addSMS = ( { number, message, sendAt } = {} ) => ({
+export const addSMS = ( sms ) => ({
   type: 'ADD_SMS',
-  sms: {
-    id: uuid(),
-    number,
-    message, 
-    sendAt
-  }
+  sms
 });
+
+export const startAddSMS = ( smsData = {} ) => {
+  return (dispatch) => {
+    const {
+       number,
+       message, 
+       sendAt 
+    } = smsData;
+    const sms = { number, message, sendAt }
+    database.ref('sms').push(sms).then((ref)=> {
+      dispatch(addSMS({
+        id: ref.key,
+        ...sms
+      }));
+    })
+  };
+};
 
 export const removeSMS = ( {id} = {}) => ({
   type: 'REMOVE_SMS',

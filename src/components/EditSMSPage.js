@@ -15,7 +15,6 @@ const EditSMSPage = (props) => {
         }}
       />
       <button onClick ={ ()=> {
-        const id = props.id
         props.dispatch(removeSMS( { id: props.sms.id } ))
         props.history.push('/')
       }}>Remove</button>

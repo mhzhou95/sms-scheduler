@@ -1,11 +1,11 @@
 import React from 'react';
 import SMSForm from './SMSForm';
 import { connect } from 'react-redux';
-import { addSMS } from '../actions/sms';
+import { startAddSMS } from '../actions/sms';
 
 class CreateSMSPage extends React.Component {
   onSubmit = (text) => {
-    this.props.addSMS(text);
+    this.props.startAddSMS(text);
     this.props.history.push('/');
   }
   render() {
@@ -19,7 +19,7 @@ class CreateSMSPage extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  addSMS: (text) => dispatch(addSMS(text))
+  startAddSMS: (text) => dispatch(startAddSMS(text))
 });
 
 export default connect (undefined, mapDispatchToProps)(CreateSMSPage);
