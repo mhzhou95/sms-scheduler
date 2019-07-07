@@ -1,25 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SMSForm from './SMSForm';
-import { editSMS , removeSMS } from '../actions/sms';
+import { startEditSMS , startRemoveSMS} from '../actions/sms';
 
-const EditSMSPage = (props) => {
-  console.log(props);
-  return (
-    <div>
-      <SMSForm 
-        sms = {props.sms}
-        onSubmit={ (sms) => {
-          props.dispatch(editSMS(props.sms.id, sms));
-          props.history.push('/')
-        }}
-      />
-      <button onClick ={ ()=> {
-        props.dispatch(removeSMS( { id: props.sms.id } ))
-        props.history.push('/')
-      }}>Remove</button>
-    </div>
-  );
+export class EditSMSPage extends React.Component{
+  onRemove = () => {
+    this.props.startRemoveSMS({id: this.props.sms.id})
+    this.props.history.push('/')
+  }
+  onSubmit = (sms) => {
+    this.props.startEditSMS(this.props.sms.id, sms);
+    this.props.history.push('/')
+  }
+  render() {
+    return (
+      <div>
+        <SMSForm 
+          sms = {this.props.sms}
+          onSubmit={this.onSubmit}
+        />
+        <button onClick ={this.onRemove}>Remove</button>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state, props) => {
@@ -29,4 +32,10 @@ const mapStateToProps = (state, props) => {
     })
   }
 }
-export default connect(mapStateToProps)(EditSMSPage);
+
+const mapDispatchToProps = (dispatch, props) => ({
+  startEditSMS: (id, sms) => dispatch(startEditSMS(id, sms)),
+  startRemoveSMS: (data) => dispatch(startRemoveSMS(data))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditSMSPage);

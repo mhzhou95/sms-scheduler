@@ -5,6 +5,7 @@
   "dependencies": {
     "firebase": "^6.2.4",
     "moment": "^2.24.0",
+    "nexmo": "^2.4.1",
     "node-sass": "^4.12.0",
     "react": "^16.8.6",
     "react-addons-shallow-compare": "^15.6.2",

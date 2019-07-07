@@ -13,6 +13,7 @@ class SMSForm extends React.Component {
       timeMinutes: props.sms? moment(props.sms.sendAt).minute() : '',
       timeFinal: '',
       sendAt: '',
+      value: 'AM',
       error: '',
       calendarFocused: false,
       createdAt: props.sms? moment(props.sms.sendAt) : moment(),
@@ -50,9 +51,16 @@ class SMSForm extends React.Component {
   }
   onSetTime = () => {
     const day = this.state.createdAt.format("D")
-    this.setState( () => ({
-      timeFinal: moment().date(day).hours(this.state.timeHours).minutes(this.state.timeMinutes).seconds(0)
-    }))
+    if(this.state.value === "PM"){
+      const hoursPM = parseInt(this.state.timeHours, 10) + 12;
+      this.setState( () => ({
+        timeFinal: moment().date(day).hours(hoursPM).minutes(this.state.timeMinutes).seconds(0)
+      }))
+    }else{
+      this.setState( () => ({
+        timeFinal: moment().date(day).hours(this.state.timeHours).minutes(this.state.timeMinutes).seconds(0)
+      }))
+    }
   }
   onDateChange = (createdAt) => {
     this.setState(()=> ({ createdAt: createdAt }))
@@ -60,22 +68,28 @@ class SMSForm extends React.Component {
   onFocusChange = ({ focused}) => {
     this.setState( ()=> ({calendarFocused: focused}))
   }
+  onHandleChange = (event) => {
+    const value = event.target.value;
+    this.setState(()=> ({ value: value}))
+  }
   onSubmit = (event) => {
     event.preventDefault();
     this.onSetTime();
-    console.log(this.state.timeFinal);
-    if (!this.state.number || !this.state.message || this.state.number.length < 10 || this.state.timeFinal.length < 4){
-      this.setState(()=> ({
-        error: 'Either phone number or Time is not valid Message is empty'
-      }))
-    }else{
-      this.setState(()=> ({ error: ''}));
-      this.props.onSubmit({
-        number: this.state.number,
-        message: this.state.message,
-        sendAt: this.state.timeFinal.valueOf()
-      }); 
-    }
+    // half a second delay so this.onSetTime() can run
+    setTimeout(()=>{
+      if (!this.state.number || !this.state.message || this.state.number.length < 10 || this.state.timeFinal.length < 4){
+        this.setState(()=> ({
+          error: 'Either phone number or Time is not valid Message is empty'
+        }))
+      }else{
+        this.setState(()=> ({ error: ''}));
+        this.props.onSubmit({
+          number: this.state.number,
+          message: this.state.message,
+          sendAt: this.state.timeFinal.valueOf()
+        }); 
+      }
+    }, 500);
   }
   render() {
     return(
@@ -88,7 +102,7 @@ class SMSForm extends React.Component {
             <input type="text" placeholder = "00" value = {this.state.timeHours} onChange={this.onTimeHoursChange} />
              : 
             <input type="text" placeholder = "00" value = {this.state.timeMinutes} onChange={this.onTimeMinutesChange} />
-            <select> 
+            <select onChange={this.onHandleChange}> 
               <option value= "AM">AM</option>
               <option value= "PM">PM</option>
             </select>

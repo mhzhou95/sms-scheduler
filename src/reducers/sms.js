@@ -19,6 +19,8 @@ const smsReducer = (state = smsReducerDefaultState , action) => {
           return sms;
         }
       })
+    case 'SET_SMS':
+      return action.texts
     default:
       return state;
   }
