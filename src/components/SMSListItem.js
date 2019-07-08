@@ -5,9 +5,9 @@ import moment from 'moment';
 
 const SMSListItem = (props) => (
   
-  <div> 
-    <Link to={`/edit/${props.id}`}><h3>{moment(moment(props.sendAt)).format("dddd, MMMM Do YYYY, h:mm a")}</h3></Link>
-    <p>{props.number} - {props.message}</p>
+  <div className="sms-list-item"> 
+    <Link className="sms-list-item-link" to={`/edit/${props.id}`}><h3>{moment(moment(props.sendAt)).format("dddd, MMMM Do YYYY, h:mm a")}</h3></Link>
+    <p className="sms-list-item-text" >To: {props.number} - {props.message}</p>
   </div>
 );
 

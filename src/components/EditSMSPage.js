@@ -14,12 +14,12 @@ export class EditSMSPage extends React.Component{
   }
   render() {
     return (
-      <div>
+      <div className="sms-edit-form">
         <SMSForm 
           sms = {this.props.sms}
           onSubmit={this.onSubmit}
         />
-        <button onClick ={this.onRemove}>Remove</button>
+        <button className="sms-remove" onClick ={this.onRemove}>Remove</button>
       </div>
     );
   }

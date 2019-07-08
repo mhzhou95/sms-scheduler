@@ -81,7 +81,7 @@ class SMSForm extends React.Component {
     setTimeout(()=>{
       if (!this.state.number || !this.state.message || this.state.number.length < 10 || this.state.timeFinal.length < 4){
         this.setState(()=> ({
-          error: 'Either phone number or Time is not valid Message is empty'
+          error: 'Please Enter valid number message and time'
         }))
       }else{
         this.setState(()=> ({ error: ''}));
@@ -96,29 +96,30 @@ class SMSForm extends React.Component {
   render() {
     return(
       <div>
-      {this.state.error && <p>{this.state.error}</p>}
-        <form onSubmit={this.onSubmit}> 
-          <input type="text" placeholder = "phone number" autoFocus value={this.state.number} onChange={this.onNumberChange} />
-          <input type="text" placeholder = "message" value ={this.state.message} onChange= {this.onMessageChange} />
+        <div className="form-error">
+          {this.state.error && <p>{this.state.error}</p>}
+        </div>
+        <form onSubmit={this.onSubmit} className="sms-form"> 
+          <input className="input-text-number" type="text" placeholder = "9 digit phone #" autoFocus value={this.state.number} onChange={this.onNumberChange} />
+          <input className="input-text-message" type="text" placeholder = "message" value ={this.state.message} onChange= {this.onMessageChange} />
           <div>
-            <input type="text" placeholder = "00" value = {this.state.timeHours} onChange={this.onTimeHoursChange} />
-             : 
-            <input type="text" placeholder = "00" value = {this.state.timeMinutes} onChange={this.onTimeMinutesChange} />
-            <select onChange={this.onHandleChange}> 
+            <input className="input-time" type="text" placeholder = "00" value = {this.state.timeHours} onChange={this.onTimeHoursChange} />
+            <div className="input-time-colon" > : </div>  
+            <input className="input-time" type="text" placeholder = "00" value = {this.state.timeMinutes} onChange={this.onTimeMinutesChange} />
+            <select className = "selector-drop-down" onChange={this.onHandleChange}> 
               <option value= "AM">AM</option>
               <option value= "PM">PM</option>
             </select>
-          </div>
-          <div>
-          <SingleDatePicker 
+            <SingleDatePicker 
             date = {this.state.createdAt}
             onDateChange = {this.onDateChange}
             focused = {this.state.calendarFocused}
             onFocusChange = {this.onFocusChange}
             numberOfMonths = {1}
-
-          /> </div>
-          <button>Create SMS</button>
+          />
+          </div>
+    
+          <button className="form-submit">Create SMS</button>
         </form>
       </div>
     );

@@ -4,7 +4,7 @@ import SMSListItem from './SMSListItem';
 import visibleSMS from '../selectors/sms';
 
 const SMSList = (props) => (
-  <div>
+  <div className="sms-list">
     {props.texts.map((sms)=> {
       return <SMSListItem key = {sms.id} {...sms} /> })}
   </div>

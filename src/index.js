@@ -6,12 +6,12 @@ import configureStore from './store/configureStore';
 import { startSetSMS } from './actions/sms';
 import { startRemoveSMS } from './actions/sms';
 import moment from 'moment';
-import Nexmo from 'nexmo';
 import './styles/styles.scss';
 import './firebase/firebase';
 import * as serviceWorker from './serviceWorker';
 
 //Nexmo
+const Nexmo = require('nexmo');
 const nexmo = new Nexmo({
   apiKey: process.env.REACT_APP_NEXMO_API_PUBLIC,
   apiSecret: process.env.REACT_APP_NEXMO_API_SECRET,
@@ -40,12 +40,11 @@ setInterval(()=>{
     if( moment(text.sendAt) <= moment().valueOf() ){
       let number = "1"; 
       number += text.number
-      console.log(number)
       nexmo.message.sendSms(from, number, text.message);
       store.dispatch(startRemoveSMS({id: text.id}))
     }
   })
-}, 10000);
+}, 31000);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

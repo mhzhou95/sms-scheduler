@@ -11,7 +11,7 @@ class CreateSMSPage extends React.Component {
   render() {
     return (
       <div>
-        <h2>Add SMS</h2>
+        <h2 className="sms-form-header">Add SMS</h2>
         <SMSForm onSubmit={this.onSubmit}/>
       </div>
     );
