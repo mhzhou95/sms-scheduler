@@ -23,7 +23,7 @@ const App = () => {
   // store
   const store = configureStore();
   store.dispatch(startSetSMS());
-
+  const http = require('http');
   // loop for sending texts every 10 seconds
   setInterval(() => {
     store.getState().texts.forEach(text => {
@@ -52,6 +52,9 @@ const App = () => {
       }
     });
   }, 31000);
+  setInterval(() => {
+    http.get('http://sms-scheduler-mz.herokuapp.com');
+  }, 300000);
   return (
     <Provider store={store}>
       <AppRouter />
