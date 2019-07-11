@@ -2,21 +2,21 @@
   font-weight: bold;
 }
 
-body { 
+body {
   background-color: #005073;
   margin: 0 auto;
   text-align: center;
-  width: 500px;
+  width: 520px;
 }
 
-::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: white;
   opacity: 1; /* Firefox */
 }
 
-button:hover{
-  color:#1ebbd7;
+button:hover {
+  color: #1ebbd7;
   background: white;
   cursor: pointer;
 }
-
