@@ -9,17 +9,6 @@ import './styles/styles.scss';
 import './firebase/firebase';
 
 const App = () => {
-  //Nexmo
-  // const Nexmo = require('nexmo');
-  // const nexmo = new Nexmo(
-  //   {
-  //     apiKey: process.env.REACT_APP_NEXMO_API_PUBLIC,
-  //     apiSecret: process.env.REACT_APP_NEXMO_API_SECRET
-  //   },
-  //   { debug: true }
-  // );
-  // const from = '16282541072';
-
   // store
   const store = configureStore();
   store.dispatch(startSetSMS());

@@ -2,13 +2,19 @@
   font-weight: bold;
 }
 
-body {
-  background-color: #005073;
+.wrapper {
   margin: 0 auto;
   text-align: center;
   width: 520px;
 }
-
+/* https://i.ibb.co/nzq2fRd/327908-abstract-wallpapers.jpg */
+body {
+  background-image: url('https://www.circleone.in/media/catalog/product/3/D/3D-Abstract-Background-Blue.jpg');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
 ::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: white;

@@ -9,7 +9,7 @@ import Header from '../components/Header';
 
 const AppRouter = () => (
   <BrowserRouter>
-    <div>
+    <div className='wrapper'>
       <Header />
       <Switch>
         <Route path='/' component={SMSDashboardPage} exact={true} />
