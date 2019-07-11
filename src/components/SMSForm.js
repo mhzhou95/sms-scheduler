@@ -52,7 +52,6 @@ class SMSForm extends React.Component {
   onSetTime = () => {
     const day = this.state.createdAt.format('D');
     const month = parseInt(this.state.createdAt.format('M'), 10) - 1;
-    console.log(month);
     if (this.state.value === 'PM') {
       const hoursPM = parseInt(this.state.timeHours, 10) + 12;
       this.setState(() => ({
@@ -164,7 +163,9 @@ class SMSForm extends React.Component {
             />
           </div>
 
-          <button className='form-submit'>Create SMS</button>
+          <button className='form-submit'>
+            {this.props.sms ? 'Update SMS' : 'Create SMS'}
+          </button>
         </form>
       </div>
     );
